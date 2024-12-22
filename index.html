@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.21.0/dist/jquery.validate.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<style>
+    body {
+        /* font-family: ; */
+        background-color: #ffd9fe;
+    }
+
+    .error {
+        color: red;
+    }
+
+    .img_dara_yel {
+        width: 400px;
+        border-radius: 10px;
+    }
+</style>
+
+<body>
+    <div class="container"> 
+        <div class="card">
+            <div class="card-body">
+                <form id="formA">
+                    <div class="row mb-2">
+                        <div class="col-12 col-sm-12 col-md-6 ">
+                            <label>ชื่อเด็กอ้วนนน</label>
+                            <input type="text" name="name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <button id="btnsubmit" class="btn btn-primary">จิ้มๆๆๆ</button>
+                        </div>
+                    </div>
+                </form>
+
+                <div id="wrap_ss" style="text-align: center;"></div>
+            </div>
+        </div>
+        <input type="hidden" id="dara" value="ดารา">
+    </div>
+
+</body>
+
+<script>
+    $(document).ready(function() {
+        // 
+        let img_idx = 0;
+        $('#formA').on('submit', function(event) {
+            event.preventDefault();
+            img_idx++
+            if(img_idx >= 6) {
+                img_idx = 0;
+            }
+        }); 
+
+        const formA = $('#formA').validate({
+            rules: {
+                name: {required: true, equalTo: "#dara"}
+            },
+            messages: {
+                name: {required: 'ชื่อเด็กม่วนนนนนน', equalTo: 'ไม่ใช่ชื่อนี้'}
+            },
+            submitHandler: function(form) {
+                const html = `<img class="img_dara_yel" src="/yel_dara_${img_idx}.jpg"></img>`
+                $('#wrap_ss').html(html);
+            }
+        })
+    })
+</script>
+</html>
